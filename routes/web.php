@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -19,8 +20,8 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/', function () {
-  $articles = DB::table('articles')->get();
-  // dd($articles);
+  $articles = Article::all();
+  dd($articles);
   return view('index');
 });
 

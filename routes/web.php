@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
   $articles = Article::all();
-  dd($articles);
+  // dd($articles);
   return view('index');
 });
 
@@ -31,4 +31,17 @@ Route::get('/about', function () {
 
 Route::get('/contact', function () {
   return view('contact');
+});
+
+Route::prefix('/admin')->group(function () {
+  Route::get('/articles/create', function () {
+    if($_GET){
+      dd($_GET);
+    }
+    return view('admin.articles.create');
+  });
+
+  Route::post('/articles/create', function () {
+    return dd('test');
+  });
 });

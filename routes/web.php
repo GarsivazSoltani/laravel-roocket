@@ -42,6 +42,19 @@ Route::prefix('/admin')->group(function () {
   });
 
   Route::post('/articles/create', function () {
-    return dd('test');
+    // $article = new Article();
+    // $article->title = request('title');
+    // $article->slug = request('title');
+    // $article->body = request('body');
+    // $article->save();
+
+    // 
+    Article::create([
+      'title' => request('title'),
+      'slug' => request('title'),
+      'body' => request('body')
+    ]);
+
+    return redirect('/admin/articles/create');
   });
 });

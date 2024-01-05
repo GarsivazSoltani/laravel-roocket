@@ -3,6 +3,7 @@
 use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Validator;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,11 +49,22 @@ Route::prefix('/admin')->group(function () {
     // $article->body = request('body');
     // $article->save();
 
-    // 
+    $validate_data = Validator::make(request()->all(), [
+      'title' => 'required|min:10|max:50',
+      'body' => 'required'
+    ])->validated();
+
+    dd($validate_data);
+    // if($validator->fails()){
+    //   return redirect()
+    //     ->back()
+    //     ->withErrors($validator);
+    // }
+
     Article::create([
-      'title' => request('title'),
-      'slug' => request('title'),
-      'body' => request('body')
+      'title' => $validate_data['title'],
+      'slug' => $validate_data['title'],
+      'body' => $validate_data['body']
     ]);
 
     return redirect('/admin/articles/create');
